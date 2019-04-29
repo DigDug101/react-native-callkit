@@ -240,12 +240,12 @@ RCT_EXPORT_METHOD(setMutedCall:(NSString *)uuidString muted:(BOOL)muted)
                 CXStartCallAction *startCallAction = [transaction.actions firstObject];
                 CXCallUpdate *callUpdate = [[CXCallUpdate alloc] init];
                 callUpdate.remoteHandle = startCallAction.handle;
+                callUpdate.hasVideo = startCallAction.video;
                 callUpdate.localizedCallerName = startCallAction.contactIdentifier;
                 callUpdate.supportsDTMF = YES;
                 callUpdate.supportsHolding = NO;
                 callUpdate.supportsGrouping = NO;
                 callUpdate.supportsUngrouping = NO;
-                callUpdate.hasVideo = NO;
                 [self.callKitProvider reportCallWithUUID:startCallAction.callUUID updated:callUpdate];
             }
         }
